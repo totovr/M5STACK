@@ -9,7 +9,7 @@ void setup() {
     delay(10);
 
     // We start by connecting to a WiFi network
-    WiFiMulti.addAP("Human-A1-721-2G", "bsys12bsys34");
+    WiFiMulti.addAP("Human-A1-721-2G_EXT", "bsys12bsys34");
 
     Serial.println();
     Serial.println();
@@ -31,7 +31,7 @@ void setup() {
 
 void loop() {
     const uint16_t port = 5204;
-    const char * host = "10.31.1.42"; // ip or dns
+    const char * host = "10.31.1.100"; // ip or dns
 
     Serial.print("connecting to ");
     Serial.println(host);
