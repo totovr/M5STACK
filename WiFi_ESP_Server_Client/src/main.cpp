@@ -3,6 +3,7 @@
 #include <WiFiMulti.h>
 
 WiFiMulti WiFiMulti;
+WiFiClient client;
 
 const uint16_t port = 5204;
 const char * host = "10.31.1.100"; // ip or dns
@@ -37,9 +38,6 @@ void loop() {
     Serial.print("connecting to ");
     Serial.println(host);
 
-    // Use WiFiClient class to create TCP connections
-    WiFiClient client;
-
     if (!client.connect(host, port)) {
             Serial.println("connection failed");
             Serial.println("wait 5 sec...");
@@ -53,10 +51,5 @@ void loop() {
     //read back one line from server
     String line = client.readStringUntil('\r');
     client.println(line);
-
-    //Serial.println("closing connection");
-    //client.stop();
-
-    //Serial.println("wait 5 sec...");
     delay(2000);
 }
