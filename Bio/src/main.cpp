@@ -5,7 +5,7 @@
 #include "BluetoothSerial.h"
 #include <driver/adc.h>
 #include <M5Stack.h>
-#include "Free_Fonts.h" // Include the header file attached to this sketch
+// #include "Free_Fonts.h" // Include the header file attached to this sketch
 
 BluetoothSerial SerialBT;
 MAX30105 particleSensor;
@@ -78,8 +78,8 @@ void setup()
   particleSensor.setPulseAmplitudeGreen(0);  //Turn off Green LED
 
   // LCD
-  M5.begin();
-  m5.Speaker.mute();
+  // M5.begin();
+  // m5.Speaker.mute();
 }
 
 void loop()
