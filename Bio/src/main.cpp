@@ -63,7 +63,7 @@ void setup()
   adc1_config_width(ADC_WIDTH_BIT_12); //Range 0-4096
 
   // GSR Setup
-  adc1_config_channel_atten(ADC1_CHANNEL_7, ADC_ATTEN_DB_11); //ADC_ATTEN_DB_11 = 0-3,6V
+  adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11); //ADC_ATTEN_DB_11 = 0-3,6V
 
   // Initialize sensor
   if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
@@ -84,6 +84,10 @@ void setup()
 
 void loop()
 {
+  SerialBT.print(gsr_average);
+  SerialBT.print(" , ");
+  SerialBT.println(userVoltage);
+
   BPMCalculation();
 
   bpmIntCurrent = beatAvg;
@@ -114,7 +118,7 @@ void GSRCalculation()
 
   for (int i = 0; i < 10; i++) //Average the 10 measurements to remove the glitch
   {
-    sensorValue = adc1_get_raw(ADC1_CHANNEL_7); //Read analog
+    sensorValue = adc1_get_raw(ADC1_CHANNEL_0); //Read analog
     // sensorValue = analogRead(32);
     gsrCurrentReading = sensorValue;
 
@@ -128,7 +132,7 @@ void GSRCalculation()
 
   gsr_average = sum / 10;
 
-  userVoltage = (gsr_average * 5) / 4096;
+  userVoltage = (gsr_average * 3.3) / 4096;
 }
 void BPMCalculation()
 {
