@@ -1,5 +1,6 @@
 #include <M5Stack.h>
 #include "BluetoothSerial.h"
+#include <driver/adc.h>
 
 BluetoothSerial SerialBT;
 
@@ -14,8 +15,8 @@ void setup()
 {
   Serial.begin(115200);
 
-  // adc1_config_width(ADC_WIDTH_BIT_12);                       
-  // adc1_config_channel_atten(ADC1_CHANNEL_7, ADC_ATTEN_DB_11); //ADC_ATTEN_DB_11 = 0-3,6V
+  adc1_config_width(ADC_WIDTH_BIT_12);                       
+  // adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11); //ADC_ATTEN_DB_11 = 0-3,6V
   SerialBT.begin("ESP32Emotion"); //Bluetooth device name
 }
 
@@ -25,8 +26,8 @@ void loop()
 
   for (int i = 0; i < 10; i++) //Average the 10 measurements to remove the glitch
   {
-    // sensorValue = adc1_get_raw(ADC1_CHANNEL_7);
-    sensorValue = analogRead(36);
+    sensorValue = adc1_get_raw(ADC1_CHANNEL_0);
+    //sensorValue = analogRead(36);
     sum += sensorValue;
     delay(5);
   }
